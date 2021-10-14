@@ -1,0 +1,59 @@
+﻿@model List<InterviewData>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form method="post" asp-controller="Home" asp-action="SendInvites">    
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <p>
+            <h4>Interview Drive 1 Data</h4>
+            <br />
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Show</th>
+                        <th scope="col">Conatct</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Experience</th>
+                        <th scope="col">Notice Period</th>
+                        <th scope="col">Interview Time</th>
+                        <th scope="col">Technical Panel</th>
+                        <th scope="col">Resume</th>
+                        <th scope="col">Meeting Link</th>
+                        <th scope="col">Feedback</th>
+                        <th scope="col">Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (InterviewData interviewData in Model)
+                    {
+                        <tr>
+                            <td>@interviewData.SrNo</td>
+                            <td>@interviewData.Name</td>
+                            <td>@interviewData.Source</td>
+                            <td>@interviewData.Show</td>
+                            <td>@interviewData.Contact</td>
+                            <td>@interviewData.Email</td>
+                            <td>@interviewData.Experience</td>
+                            <td>@interviewData.NoticePeriod</td>
+                            <td>@interviewData.InterviewTime</td>
+                            <td><a class="alert-dismissible" href="@interviewData.ResumeLink" target="_blank">Resume</a></td>
+                            <td>@interviewData.TechnicalPanel</td>
+                            @*<td>@interviewData.MeetingLink</td>
+                                <td>@interviewData.Status</td>
+                                <td>@interviewData.Feedback</td>
+                                <td>@interviewData.Note</td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <input class="btn btn-primary" type="submit" value="Send Invites" />
+        </p>
+    </div>
+</form>
+
