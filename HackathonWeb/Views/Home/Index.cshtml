@@ -3,57 +3,86 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form method="post" asp-controller="Home" asp-action="SendInvites">    
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        <p>
-            <h4>Interview Drive 1 Data</h4>
-            <br />
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Sr. No.</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Source</th>
-                        <th scope="col">Show</th>
-                        <th scope="col">Conatct</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Experience</th>
-                        <th scope="col">Notice Period</th>
-                        <th scope="col">Interview Time</th>
-                        <th scope="col">Technical Panel</th>
-                        <th scope="col">Resume</th>
-                        <th scope="col">Meeting Link</th>
-                        <th scope="col">Feedback</th>
-                        <th scope="col">Note</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (InterviewData interviewData in Model)
-                    {
-                        <tr>
-                            <td>@interviewData.SrNo</td>
-                            <td>@interviewData.Name</td>
-                            <td>@interviewData.Source</td>
-                            <td>@interviewData.Show</td>
-                            <td>@interviewData.Contact</td>
-                            <td>@interviewData.Email</td>
-                            <td>@interviewData.Experience</td>
-                            <td>@interviewData.NoticePeriod</td>
-                            <td>@interviewData.InterviewTime</td>
-                            <td><a class="alert-dismissible" href="@interviewData.ResumeLink" target="_blank">Resume</a></td>
-                            <td>@interviewData.TechnicalPanel</td>
-                            @*<td>@interviewData.MeetingLink</td>
-                                <td>@interviewData.Status</td>
-                                <td>@interviewData.Feedback</td>
-                                <td>@interviewData.Note</td>*@
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <input class="btn btn-primary" type="submit" value="Send Invites" />
-        </p>
-    </div>
-</form>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
+<!-- Styles -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<form asp-controller="Home" asp-action="SendInvites">
+    <div class="text-center">
+        <h4>Interview Drive 1 Data</h4>
+        <br />
+        <table class="table table-borded table-responsive table-striped " id="table-list">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Sr. No.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Source</th>
+                    <th scope="col">Show</th>
+                    <th scope="col">Contact</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Exp</th>
+                    <th scope="col">Notice Period</th>
+                    <th scope="col">Resume</th>
+                    <th style="display:none" id="thPanel" scope="col">Panel</th>
+                    <th style="display:none" id="thTime" scope="col">Date & Time</th>
+                    <th style="display:none" id="thMeeting" scope="col">Meeting Link</th>
+                    <th style="display:none" id="thStatus" scope="col">Status</th>
+                    <th style="display:none" id="thFeedback" scope="col">Feedback</th>
+                    <th style="display:none" id="thNote" scope="col">Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (InterviewData interviewData in Model)
+                {
+                <tr>
+                    <td>@interviewData.SrNo</td>
+                    <td>@interviewData.Name</td>
+                    <td>@interviewData.Source</td>
+                    <td>@interviewData.Show</td>
+                    <td>@interviewData.Contact</td>
+                    <td>@interviewData.Email</td>
+                    <td>@interviewData.Experience</td>
+                    <td>@interviewData.NoticePeriod</td>
+                    <td><a href="@interviewData.ResumeLink" class="alert-dismissible" target="_blank">Resume</a></td>
+                    <td style="display:none" id="tdPanel">@interviewData.TechnicalPanel</td>
+                    <td style="display:none" id="tdTime">@interviewData.InterviewTime</td>
+                    <td style="display:none" id="tdMeeting">@interviewData.MeetingLink</td>
+                    <td style="display:none" id="tdStatus">@interviewData.Status</td>
+                    <td style="display:none" id="tdFeedback">@interviewData.Feedback</td>
+                    <td style="display:none" id="tdNote">@interviewData.Note</td>
+                </tr>
+                }
+            </tbody>
+        </table>        
+        <button class="btn btn-info" id="add"><span class="gly0.phicon glyphicon-plus-sign"></span>Add</button>
+        <input class="btn btn-primary" type="submit" value="Send Invites" />        
+    </div>
+    <style type="text/css">
+        .table-content {
+            width: 450px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        td {
+            width: 100px;
+            height: 50px;
+        }
+    </style>
+    <script src="~/js/bootstable.js"></script>
+    <script type="text/javascript">
+        $("#table-list").SetEditable();
+        $('#add').click(function () {
+            rowAddNew('table-list', [1, 2, 3]);
+        });
+    </script>
+</form>
